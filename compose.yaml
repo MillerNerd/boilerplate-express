@@ -41,6 +41,4 @@ services:
 
 networks:
   db: null
-  express:
-
-    null
+  express: null
