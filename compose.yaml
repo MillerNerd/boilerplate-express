@@ -30,7 +30,7 @@ services:
       dockerfile: Dockerfile.dev
       cache_from:
         - node:17
-    command: npx localtunnel -p 3000 -s millergeek -h express
+    command: npx localtunnel -p 3000 -s millergeek -l express
     depends_on:
       express:
         condition: service_healthy
