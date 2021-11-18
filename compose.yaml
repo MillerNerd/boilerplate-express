@@ -1,0 +1,46 @@
+services:
+  express:
+    image: millernerd/express-boilerplate
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      cache_from:
+        - node:17
+    command: npm run dev
+    healthcheck:
+      test: curl -f localhost:3000
+      interval: 5s
+      timeout: 2s
+      start_period: 30s
+    networks:
+      - express
+      - db
+    pull_policy: never
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: .
+        target: /usr/src/app
+        read_only: true
+
+  localtunnel:
+    image: millernerd/express-boilerplate
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      cache_from:
+        - node:17
+    command: npx localtunnel -p 3000 -s millergeek -h express
+    depends_on:
+      express:
+        condition: service_healthy
+    networks:
+      - express
+    pull_policy: never
+    restart: unless-stopped
+
+networks:
+  db: null
+  express:
+
+    null
