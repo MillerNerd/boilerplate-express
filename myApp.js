@@ -1,4 +1,5 @@
 require('dotenv').config()
+const bodyParser = require('body-parser');
 const { application } = require('express');
 var express = require('express');
 var app = express();
