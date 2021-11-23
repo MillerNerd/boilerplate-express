@@ -1,6 +1,6 @@
 require('dotenv').config()
-import { application } from 'express';
-import express, { static } from 'express';
+const { application } = require('express');
+var express = require('express');
 var app = express();
 
 console.log("Hello World");
@@ -10,7 +10,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use("/public", static(__dirname + "/public"));
+app.use("/public", express.static(__dirname + "/public"));
 
 app.get('/', (req, res) => {
     // res.send("Hello Express")
@@ -39,4 +39,4 @@ app.get("/:word/echo", (req, res, next) => {
   res.send({echo: req.params.word});
 })
 
-export default app;
+module.exports = app;
