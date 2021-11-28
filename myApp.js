@@ -17,7 +17,7 @@ app.use(bodyParser.json())
 
 app.use("/public", express.static(__dirname + "/public"));
 
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
     // res.send("Hello Express")
   res.sendFile(__dirname + '/views/index.html')
 })
@@ -45,6 +45,10 @@ app.get("/:word/echo", (req, res, next) => {
 app.route("/name")
 .get((req, res, next) => {
   let { first: firstName, last: lastName } = req.query;
+  res.json({ "name": `${firstName} ${lastName}`});
+})
+.post((req, res, next) => {
+  let { first: firstName, last: lastName } = req.body;
   res.json({ "name": `${firstName} ${lastName}`});
 })
 
